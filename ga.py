@@ -137,7 +137,6 @@ class GA():
                 gene = self.tmp_pop[np.argmax(self.tmp_ff)]
             else:
                 count += 1
-        #print(cut)
 
         ins = np.zeros(self.target_num+1, dtype=np.int32)
         seq = np.zeros(self.target_num, dtype=np.int32)
@@ -170,11 +169,8 @@ class GA():
                     reward += self.targets[seq[post], 2]
                 pre = seq[post]
                 post += 1
-        #print(reward)
         print("GA result:", task_assignment)
-        #self.task_assignment = task_assignment
         end_time = time.time()
-        #self.cal_time = end_time - start_time
         print("GA time:", end_time - start_time)
         return task_assignment, end_time - start_time
 

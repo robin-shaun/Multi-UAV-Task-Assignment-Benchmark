@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import random
-import time
 import pandas as pd
 import copy
 from multiprocessing import Pool
@@ -43,8 +42,8 @@ class Env():
         for i in range(self.targets.shape[0]-1):
             self.targets[i+1,0] = random.randint(1,self.map_size) - 0.5*self.map_size # x position
             self.targets[i+1,1] = random.randint(1,self.map_size) - 0.5*self.map_size # y position
-            self.targets[i+1,2] = random.randint(1,10) # value
-            self.targets[i+1,3] = random.randint(5,30) # time to stay  
+            self.targets[i+1,2] = random.randint(1,10) # reward
+            self.targets[i+1,3] = random.randint(5,30) # time consumption to finish the mission  
         for i in range(self.targets.shape[0]):
             for j in range(self.targets.shape[0]):
                 self.distant_mat[i,j] = np.linalg.norm(self.targets[i,:2]-self.targets[j,:2])
@@ -129,8 +128,7 @@ class Env():
             plt.savefig('task_pic/'+self.size+'/'+self.algorithm+ "-%d-%d.png" % (self.play,self.rond))
             plt.cla()
             
-def procedure(vehicle_num, target_num, map_size):
-    # Test 1
+def evaluate(vehicle_num, target_num, map_size):
     if vehicle_num==5:
         size='small'
     if vehicle_num==10:
@@ -251,70 +249,9 @@ def procedure(vehicle_num, target_num, map_size):
     
     
 if __name__=='__main__':
-    procedure(5,30,5e3)
-    procedure(10,60,1e4)
-    procedure(15,90,1.5e4)
-'''
-    p = Pool(2)
-    vehicle_num = 10
-    target_num = 60
-    map_size = 1e4
-    env = Env(vehicle_num,target_num,map_size,visualized=True)
-    ga = GA(vehicle_num,env.vehicles_speed,target_num,env.targets,env.time_lim)
-    #aco = ACO(vehicle_num,target_num,env.vehicles_speed,env.targets,env.time_lim)
-    pso = PSO(vehicle_num,target_num ,env.targets,env.vehicles_speed,env.time_lim)
-    ga_result = p.apply_async(ga.run)
-    #aco_result = p.apply_async(aco.run)
-    pso_result = p.apply_async(pso.run)
-    p.close()
-    p.join()
-    ga_task_assignmet = ga_result.get()[0]
-    env.run(ga_task_assignmet,'GA')
-    #env.reset()
-    #aco_task_assignmet = ga_result.get()[0]
-    #env.run(aco_task_assignmet,'ACO')
-    env.reset()
-    pso_task_assignmet = pso_result.get()[0]
-    env.run(pso_task_assignmet,'PSO')
-        
-    # Test 3
-    p = Pool(2)
-    vehicle_num = 15
-    target_num = 90
-    map_size = 1.5e4
-    env = Env(vehicle_num,target_num,map_size,visualized=True)
-    ga = GA(vehicle_num,env.vehicles_speed,target_num,env.targets,env.time_lim)
-    #aco = ACO(vehicle_num,target_num,env.vehicles_speed,env.targets,env.time_lim)
-    pso = PSO(vehicle_num,target_num ,env.targets,env.vehicles_speed,env.time_lim)
-    ga_result = p.apply_async(ga.run)
-    #aco_result = p.apply_async(aco.run)
-    pso_result = p.apply_async(pso.run)
-    p.close()
-    p.join()
-    ga_task_assignmet = ga_result.get()[0]
-    env.run(ga_task_assignmet,'GA')
-    #env.reset()
-    #aco_task_assignmet = ga_result.get()[0]
-    #env.run(aco_task_assignmet,'ACO')
-    env.reset()
-    pso_task_assignmet = pso_result.get()[0]
-    env.run(pso_task_assignmet,'PSO')
-'''     
-'''
-    time_record = []
-    reward_record = []
-    for i in range(100):
-        vehicle_num = random.randint(5,15)
-        target_num =  random.randint(30,100)
-        map_size = random.randint(5e3,2e4) # meter
-        env = Env(vehicle_num,target_num,map_size,visualized=True)
-        time_start = time.time()
-        task_assignment = [[i+1 for i in range(0,5)],[i+1 for i in range(5,20)],[i+1 for i in range(20,30)]]
-        time_end = time.time()
-        time_record.append(time_end-time_start) 
-        algorithm = 'customized'   
-        env.run(task_assignment,algorithm)
-        reward_record.append(env.total_reward)
-    dataframe = pd.DataFrame({'time':time_record,'reward':reward_record})
-    dataframe.to_csv(algorithm+'.csv',sep=',')
-'''
+    # small scale
+    evaluate(5,30,5e3)
+    # medium scale
+    evaluate(10,60,1e4)
+    # large scale
+    evaluate(15,90,1.5e4)

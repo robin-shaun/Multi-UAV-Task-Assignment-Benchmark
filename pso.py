@@ -65,12 +65,10 @@ class PSO():
     # ------------------Get Initial parameter------------------
 
     def fun_get_initial_parameter(self):
-        # self.max_iter=1000
         self.max_iter = 40*(self.uav_num+self.dim)
         if self.max_iter > 4100:
             self.max_iter = 4100
 
-        # self.test_num=10000
         # Get Stay_time Arrary & Distance Arrary & Value Arrary
         Targets = self.targets
         self.Stay_time = Targets[:, 3]
@@ -363,26 +361,4 @@ class PSO():
         print("PSO time:", end_time - start_time)
         return self.uav_best, end_time - start_time
         
-
-
-        # -------------Result-------------------------
-if __name__ == '__main__':
-    # ----------------------------------TEST--------------------------------
-    '''
-    Test_Value=my_pso.fun_TEST()
-    l1=len(fitness)
-    k=0
-    Test_Value_out=[]
-    for i in range(test_num):
-        if Test_Value[i]>fitness[l1-1]:
-            k=k+1
-            Test_Value_out.append(Test_Value[i])
-    print("测试结果超过优化后的目标值的个数是：",k,"个")
-    if k > 0:
-        print("这些测试结果分别是：",Test_Value_out)
-    #print("测试的适应值是",Test_Value)
-    env.run(my_pso.uav_best,'pso')
-    print(env.vehicles_time)
-    print('time_limit:',env.time_lim)
-    '''
 
