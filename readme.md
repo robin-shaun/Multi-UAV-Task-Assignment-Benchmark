@@ -12,6 +12,9 @@ A benchmark for multi-UAV task assignment is presented in order to evaluate diff
 
 Please refer to the paper to see more detail.
 
+Xiao, K., Lu, J., Nie, Y., Ma, L., Wang, X., Wang, G.: A Benchmark for Multi-UAV Task Assignment of an Extended Team Orienteering Problem. arXiv preprint **[ arXiv:2009.00363](https://arxiv.org/abs/2009.00363)**  (2020)
+
+
 ## Usage
 
 ### 1. Algorithm input and output
