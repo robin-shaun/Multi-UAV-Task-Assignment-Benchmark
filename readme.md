@@ -4,6 +4,8 @@
 ## Introduction
 A benchmark for multi-UAV task assignment is presented in order to evaluate different algorithms. An extended Team Orienteering Problem is modeled for a kind of multi-UAV task assignment problem. Three intelligent algorithms, i.e., Genetic Algorithm, Ant Colony Optimization and Particle Swarm Optimization are implemented to solve the problem. A series of experiments with different settings are conducted to evaluate three algorithms. The modeled problem and the evaluation results constitute a benchmark, which can be used to evaluate other algorithms used for multi-UAV task assignment problems.
 
+Notice that three algorithms run at three CPU cores respectively, which means that there is no parallel optimization in this benchmark.
+
 <img src="./task_pic/large/ACO-1-1.png" width="640" height="368" />  
 
 <img src="./mean_reward_large.png" width="640" height="368" />  
