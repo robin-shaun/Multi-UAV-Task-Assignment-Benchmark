@@ -58,3 +58,43 @@ re_pso[i].append((env.total_reward,pso_result.get()[1]))
 ### 3. About reinforcement learning
 
 In `Env()` in `evaluate.py`, function `step` is used for reinforcement learning. Because this is still being developed, we cannot supply a demo. If your algorithm is reinforcement learning, you can try to train it with `Env()`. Your pull request and issue are welcome.
+
+## Enhancement
+
+This [repository](https://github.com/dietmarwo/Multi-UAV-Task-Assignment-Benchmark) does great enhancement and you can use it for high performance. Thanks to [dietmarwo](https://github.com/dietmarwo) for the nice work.
+
+1) GA uses [numba](https://numba.pydata.org/) for a dramatic speedup. Parameters are adapted so that the
+    execution time remains the same: popsize 50 -> 300, iterations 500 -> 6000
+    For this reason GA now performs much better compared to the original version.
+
+2) Experiments are configured so that wall time for small size is balanced. This means:
+    increased effort for GA, decreased effort for ACO. For medium / large 
+    problem size you see which algorithms scale badly: Increase execution time superlinear
+    in relation to the problem size. Avoid these for large problems. 
+
+3) Adds a standard continuous optimization algorithm: [BiteOpt](https://github.com/avaneev/biteopt) 
+    from Aleksey Vaneev - using the same fitness function as GA.py. 
+    BiteOpt is the only algorithm included which works well with a large problem size. 
+    It is by far the simplest implementation, only the fitness function needs
+    to be coded, since we can apply a continuous optimization library 
+    [fcmaes](https://github.com/dietmarwo/fast-cma-es). Execute "pip install fcmaes" to use it. 
+
+4) Uses NestablePool to enable BiteOpt multiprocessing: Many BiteOpt optimization runs
+   are performed in parallel and the best result is returned. Set workers=1 
+   if you want to test BiteOpt single threaded. 
+   
+5) All results are created using an AMD 5950x 16 core processor
+    utilizing all cores: 29 parallel BiteOpt threads, the other 3 algorithms remain single threaded. 
+
+6) Added test_bite.py where you can monitor the progress of BiteOpt applied to the problem.
+
+7) Added test_mode.py where you can monitor the progress of fcmaes-MODE applied to the problem and compare it
+   to BiteOpt for the same instance. fcmaes-MODE is a multi-objective optimizer applied to a 
+   multi-objective variant of the problem.
+   Objectives are: reward (to be maximized), maximal time (to be minimized), energy (to be minimized).
+   The maximal time constraint from the single objective case is still valid.
+   Energy consumption is approximated by `sum(dt*v*v)`
+
+
+ 
+
