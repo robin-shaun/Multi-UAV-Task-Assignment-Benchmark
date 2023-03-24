@@ -14,7 +14,9 @@ Notice that three algorithms run at three CPU cores respectively, which means th
 
 Please refer to the paper to see more detail.
 
-Xiao, K., Lu, J., Nie, Y., Ma, L., Wang, X., Wang, G.: A Benchmark for Multi-UAV Task Assignment of an Extended Team Orienteering Problem. arXiv preprint **[ arXiv:2009.00363](https://arxiv.org/abs/2009.00363)**  (2020)
+K. Xiao, J. Lu, Y. Nie, L. Ma, X. Wang and G. Wang, "A Benchmark for Multi-UAV Task Assignment of an Extended Team Orienteering Problem," 2022 China Automation Congress (CAC), Xiamen, China, 2022, pp. 6966-6970, doi: 10.1109/CAC57257.2022.10054991.
+
+ArXiv preprint **[ arXiv:2003.09700](https://arxiv.org/abs/2009.00363)** 
 
 
 ## Usage
